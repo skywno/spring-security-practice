@@ -20,15 +20,22 @@ public class SpringSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/home")
+        http.authorizeRequests()
+                .antMatchers("/", "/home", "/index")
                     .permitAll()
-                    .anyRequest()
+                .antMatchers("/private")
+                    .hasRole("USER")
+                .antMatchers("/admin")
+                    .hasRole("ADMIN")
+                .anyRequest()
                     .authenticated()
                 .and()
                     .formLogin() // enable form based log in
+                    .defaultSuccessUrl("/")
                     .permitAll()
                 .and()
                 .logout();
+
         return http.build();
     }
 
