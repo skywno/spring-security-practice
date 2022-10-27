@@ -16,24 +16,21 @@ public class PostService {
     private final UserRepository userRepository;
     private final PostRepository postRepository;
 
-    public List<Post> findByUserName(String username) {
-        User user = userRepository.findByUsername(username);
+    public List<Post> findByUser(User user) {
         if (user == null) {
             throw new RuntimeException("유저가 없습니다.");
         }
         return postRepository.findByUserAndStatus(user, PostStatus.Y);
     }
 
-    public Post savePost(String username, String title, String content) {
-        User user = userRepository.findByUsername(username);
+    public Post savePost(User user, String title, String content) {
         if (user == null) {
             throw new RuntimeException("유저가 없습니다.");
         }
         return postRepository.save(new Post(title, content, user));
     }
 
-    public void deletePost(String username, Long id) {
-        User user = userRepository.findByUsername(username);
+    public void deletePost(User user, Long id) {
         if (user == null) {
             throw new RuntimeException("유저가 없습니다.");
         }
