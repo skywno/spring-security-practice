@@ -34,9 +34,9 @@ public class SpringSecurityConfig {
                     .hasRole("USER")
                 .antMatchers("/admin")
                     .hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/notice")
+                .antMatchers(HttpMethod.POST, "/notice/**")
                     .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/notice")
+                .antMatchers(HttpMethod.DELETE, "/notice/**")
                     .hasRole("ADMIN")
                 .anyRequest()
                     .authenticated()
@@ -50,8 +50,8 @@ public class SpringSecurityConfig {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/");
 
-        http.csrf().disable();
-        http.headers().frameOptions().disable();
+//        http.csrf().disable();
+//        http.headers().frameOptions().disable();
         return http.build();
     }
 
