@@ -43,4 +43,12 @@ public class Post {
         this.user = user;
         this.status = PostStatus.Y;
     }
+
+    public void updateContent(
+            String title,
+            String content
+    ) {
+        this.title = title;
+        this.content = content;
+    }
 }

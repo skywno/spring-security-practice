@@ -1,6 +1,7 @@
 package me.ezra.security.notice;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +16,7 @@ public class NoticeService {
 
     @Transactional(readOnly = true)
     public List<Notice> findAll() {
-        return noticeRepository.findAll();
+        return noticeRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
     }
 
     public Notice saveNotice(String title, String content) {

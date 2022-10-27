@@ -1,4 +1,4 @@
-package me.ezra.security.User;
+package me.ezra.security.Exception;
 
 public class UserNotFoundException extends RuntimeException {
 
