@@ -1,14 +1,16 @@
 package me.ezra.security.config;
 
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-public class MyConfig implements WebMvcConfigurer {
+@Configuration
+public class MvcConfig implements WebMvcConfigurer {
 
-    public void addViewController(ViewControllerRegistry registry){
+    public void addViewControllers(ViewControllerRegistry registry){
         registry.addViewController("/home").setViewName("index");
         registry.addViewController("/").setViewName("index");
-        registry.addViewController("/private").setViewName("private/index");
+        registry.addViewController("/login").setViewName("login");
         registry.addViewController("/admin").setViewName("admin/index");
     }
 

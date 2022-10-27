@@ -1,0 +1,26 @@
+logging:
+  level:
+    org.springframework.web: debug
+    sql: error
+spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  thymeleaf3:
+    decoupled-logic: true
+  security:
+    user:
+      name: admin
+      password: password
+  h2:
+    console:
+      enabled: true
+  datasource:
+    username: root
+    password: password
+
+management:
+  security:
+    role : SUPERUSER
+
