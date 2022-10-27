@@ -36,6 +36,9 @@ public class User implements UserDetails {
         this.authority = authority;
     }
 
+    public Boolean isAdmin() {
+        return authority.equals("ROLE_ADMIN");
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton((GrantedAuthority) () -> authority);
