@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -61,13 +62,14 @@ class NoticeControllerTest {
     }
 
     @Test
-    @DisplayName("[POST] postNotice = 유저 인증 있음")
+    @DisplayName("[POST] postNotice = 인증 없음")
     void whenPostingNoticeWithoutAuthentication_thenForbidden() throws Exception {
         // Given
-        String content = objectMapper.writeValueAsString(new Notice("제목", "내용"));
         // When & Then
         mvc.perform(post("/notice")
-                .content(content)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("title", "제목")
+                .param("content", "내용")
         ).andExpect(status().isForbidden());
 
     }
@@ -77,10 +79,11 @@ class NoticeControllerTest {
     @DisplayName("[POST] getNotpostNoticeice = 유저 인증 있음")
     void whenPostingNoticeWithAdminAuthorization_thenForbidden() throws Exception {
         // Given
-        String content = objectMapper.writeValueAsString(new Notice("제목", "내용"));
         // When & Then
         mvc.perform(post("/notice").with(csrf())
-                .content(content)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("title", "제목")
+                .param("content", "내용")
         ).andExpect(status().isForbidden());
 
     }
@@ -90,10 +93,11 @@ class NoticeControllerTest {
     @DisplayName("[POST] postNotice = 어드민 인증 있음")
     void whenPostingNoticeWithAdminAuthorization_thenOk() throws Exception {
         // Given
-        String content = objectMapper.writeValueAsString(new Notice("제목", "내용"));
         // When & Then
         mvc.perform(post("/notice").with(csrf())
-                .content(content)
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("title", "제목")
+                .param("content", "내용")
         ).andExpect(status().is3xxRedirection());
     }
 

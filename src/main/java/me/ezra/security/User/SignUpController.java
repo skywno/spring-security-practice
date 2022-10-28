@@ -2,7 +2,6 @@ package me.ezra.security.User;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +22,9 @@ public class SignUpController {
 
     @PostMapping
     public String signup(
-            @ModelAttribute UserDto userDto
+            @ModelAttribute UserRegisterDto userRegisterDto
     ) {
-        userService.signup(userDto.getUsername(), userDto.getPassword());
+        userService.signup(userRegisterDto.getUsername(), userRegisterDto.getPassword());
         return "redirect:login";
     }
 }

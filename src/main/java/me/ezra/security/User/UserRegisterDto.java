@@ -1,14 +1,12 @@
 package me.ezra.security.User;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserDto {
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+public class UserRegisterDto {
     private String username;
     private String password;
 }
