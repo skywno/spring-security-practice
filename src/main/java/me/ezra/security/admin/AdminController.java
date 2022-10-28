@@ -1,7 +1,9 @@
-package me.ezra.security.note;
+package me.ezra.security.admin;
 
 import lombok.RequiredArgsConstructor;
-import me.ezra.security.User.User;
+import me.ezra.security.note.Note;
+import me.ezra.security.note.NoteService;
+import me.ezra.security.user.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
