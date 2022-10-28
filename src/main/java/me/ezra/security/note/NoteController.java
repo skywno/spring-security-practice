@@ -32,9 +32,9 @@ public class NoteController {
     }
 
     @DeleteMapping
-    public String deleteNote(Authentication authentication, @RequestParam Long id) {
+    public String deleteNote(Authentication authentication, @RequestParam(value = "id") Long noteId) {
         User user = (User) authentication.getPrincipal();
-        noteService.deleteNote(user, id);
+        noteService.deleteNote(user, noteId);
         return "redirect:note";
     }
 }

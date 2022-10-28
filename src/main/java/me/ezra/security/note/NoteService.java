@@ -37,7 +37,8 @@ public class NoteService {
         if (user == null) {
             throw new UserNotFoundException();
         }
-        Note note = noteRepository.findByIdAndUser(noteId, user);
-        noteRepository.delete(note);
+        noteRepository.findByIdAndUser(noteId, user)
+                .ifPresent(note -> noteRepository.delete(note)
+        );
     }
 }
