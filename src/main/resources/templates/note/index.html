@@ -16,7 +16,7 @@
 <div class="container">
   <h1>게시글</h1>
 
-  <!-- Button trigger modal -->
+  <!-- 노트 작성 Modal Button -->
   <button
     type="button"
     class="btn btn-primary"
@@ -26,7 +26,7 @@
     새 글 쓰기
   </button>
 
-  <!-- Modal -->
+  <!-- 노트 작성 Modal -->
   <div
     class="modal fade"
     id="newPostModal"
@@ -46,7 +46,7 @@
           </button>
         </div>
         <form
-          th:action="@{/post}"
+          th:action="@{/templates/note}"
           method="post"
         >
           <div class="modal-body">
@@ -67,19 +67,22 @@
       </div>
     </div>
   </div>
-
+  <!-- 노트 내용 조회 -->
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <div class="border border-dark" th:each="post : ${posts}">
-        <h2 th:text="${post.title}"></h2>
+      <!-- 노트 개수만큼 반복 -->
+      <div class="border border-dark" th:each="note : ${notes}">
+        <h2 th:text="${note.title}"></h2>
         <div>
-          <p th:text="${post.content}" style="white-space: pre-wrap;"></p>
-          <form th:action="@{/post}" th:method="delete">
-            <input type="hidden" name="id" th:value="${post.id}">
+          <p th:text="${note.content}" style="white-space: pre-wrap;"></p>
+          <form th:action="@{/templates/note}" th:method="delete">
+            <input type="hidden" name="id" th:value="${note.id}">
+            <!-- 작성일자 표시 -->
             <span style="margin: 10px 0px;">Posted by
-              <strong th:if="${post.user}" th:text="${post.user.username}"></strong> on
-              <strong th:text="${#temporals.format(post.createdAt, 'yyyy-MM-dd')}"></strong>
+              <strong th:if="${note.user}" th:text="${note.user.username}"></strong> on
+              <strong th:text="${#temporals.format(note.createdAt, 'yyyy-MM-dd')}"></strong>
             </span>
+            <!-- 노트 삭제 버튼 -->
             <button type="submit" class="btn btn-secondary">삭제</button>
           </form>
         </div>

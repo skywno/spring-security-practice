@@ -27,6 +27,7 @@
           <li class="nav-item">
             <a class="nav-link active" th:href="@{/}">홈</a>
           </li>
+          <!-- 관리자만 -->
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -36,6 +37,7 @@
               관리자 페이지
             </a>
           </li>
+          <!-- 로그인한 사람 모두 -->
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -45,24 +47,17 @@
               공지사항
             </a>
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              sec:authorize="hasRole('ROLE_ADMIN')"
-              th:href="@{/admin/post}"
-            >
-              게시글
-            </a>
-          </li>
+          <!-- 유저만 -->
           <li class="nav-item">
             <a
               class="nav-link active"
               sec:authorize="hasRole('ROLE_USER')"
-              th:href="@{/post}"
+              th:href="@{/templates/note}"
             >
               게시글
             </a>
           </li>
+          <!-- 로그인 안한 사람만 -->
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -72,6 +67,7 @@
               로그인
             </a>
           </li>
+          <!-- 로그인 안한 사람만 -->
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -81,6 +77,7 @@
               회원가입
             </a>
           </li>
+          <!-- 로그인한사람만 -->
           <li class="nav-item">
             <a
               class="nav-link active"
