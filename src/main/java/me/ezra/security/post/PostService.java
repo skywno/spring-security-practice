@@ -21,7 +21,7 @@ public class PostService {
             throw new UserNotFoundException();
         }
         if (user.isAdmin()) {
-            return postRepository.findAll(Sort.by(Sort.Direction.DSEC, "id"));
+            return postRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
         }
         return postRepository.findByUserOrderByIdDesc(user);
     }
