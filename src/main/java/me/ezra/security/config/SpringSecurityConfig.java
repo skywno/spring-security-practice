@@ -36,25 +36,21 @@ public class SpringSecurityConfig {
                 .antMatchers("/", "/home", "/index", "/signup", "/h2" +
                         "-console/**", "/console/**")
                 .permitAll()
-                .antMatchers("/post")
-                .hasRole("USER")
-                .antMatchers("/admin")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.POST, "/notice/**")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/notice/**")
-                .hasRole("ADMIN")
+                .antMatchers("/note").hasRole("USER")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/notice/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/notice/**").hasRole("ADMIN")
                 .anyRequest()
-                .authenticated()
+                    .authenticated()
                 .and()
                 .formLogin() // enable form based log in
-                .loginPage("/login")
-                .defaultSuccessUrl("/")
-                .permitAll()
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/")
+                    .permitAll()
                 .and()
-                .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                    .logout()
+                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                    .logoutSuccessUrl("/");
 
         http.httpBasic().disable(); //basic authentication filter 비활성화
         // Remember-Me
