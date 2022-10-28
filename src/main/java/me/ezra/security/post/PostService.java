@@ -3,6 +3,7 @@ package me.ezra.security.post;
 import lombok.RequiredArgsConstructor;
 import me.ezra.security.Exception.UserNotFoundException;
 import me.ezra.security.User.User;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,9 +21,9 @@ public class PostService {
             throw new UserNotFoundException();
         }
         if (user.isAdmin()) {
-            return postRepository.findByStatusOrderByIdDesc(PostStatus.Y);
+            return postRepository.findAll(Sort.by(Sort.Direction.DSEC, "id"));
         }
-        return postRepository.findByUserAndStatusOrderByIdDesc(user, PostStatus.Y);
+        return postRepository.findByUserOrderByIdDesc(user);
     }
 
     public Post savePost(User user, String title, String content) {
