@@ -1,4 +1,4 @@
-package me.ezra.security.User;
+package me.ezra.security.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

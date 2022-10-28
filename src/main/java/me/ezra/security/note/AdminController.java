@@ -1,4 +1,4 @@
-package me.ezra.security.post;
+package me.ezra.security.note;
 
 import lombok.RequiredArgsConstructor;
 import me.ezra.security.User.User;
@@ -15,13 +15,13 @@ import java.util.List;
 @RequestMapping("/admin")
 public class AdminController {
 
-    private final PostService postService;
+    private final NoteService noteService;
 
     @GetMapping
-    public String getPostByAdmin(Authentication authentication, Model model) {
+    public String getNoteByAdmin(Authentication authentication, Model model) {
         User user = (User) authentication.getPrincipal();
-        List<Post> posts = postService.findByUser(user);
-        model.addAttribute("posts", posts);
+        List<Note> notes = noteService.findByUser(user);
+        model.addAttribute("notes", notes);
         return "admin/index";
     }
 }

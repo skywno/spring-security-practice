@@ -107,9 +107,11 @@ class NoticeControllerTest {
         // Given
         Notice notice = noticeRepository.save(new Notice("제목", "내용"));
         // When & Then
-        mvc.perform(delete("/notice/" + notice.getId()).with(csrf()))
-                .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/login"));
+        mvc.perform(delete("/notice")
+                        .with(csrf())
+                        .queryParam("id", notice.getId().toString())
+                ).andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("http://localhost/login"));
 
     }
 
@@ -120,7 +122,9 @@ class NoticeControllerTest {
         // Given
         Notice notice = noticeRepository.save(new Notice("제목", "내용"));
         // When & Then
-        mvc.perform(delete("/notice/" + notice.getId()).with(csrf())
+        mvc.perform(delete("/notice")
+                .with(csrf())
+                .queryParam("id", notice.getId().toString())
         ).andExpect(status().isForbidden());
 
     }
@@ -132,10 +136,11 @@ class NoticeControllerTest {
         // Given
         Notice notice = noticeRepository.save(new Notice("제목", "내용"));
         // When & Then
-        mvc.perform(delete("/notice").with(csrf()).queryParam("id",
-                        notice.getId().toString())
+        mvc.perform(delete("/notice")
+                        .with(csrf())
+                        .queryParam("id", notice.getId().toString())
                 ).andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/notice"));
+                .andExpect(redirectedUrl("notice"));
     }
 
 

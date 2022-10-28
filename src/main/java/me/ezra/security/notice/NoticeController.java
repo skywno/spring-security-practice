@@ -1,7 +1,7 @@
 package me.ezra.security.notice;
 
 import lombok.RequiredArgsConstructor;
-import me.ezra.security.post.PostRegisterDto;
+import me.ezra.security.note.NoteRegisterDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +22,8 @@ public class NoticeController {
     }
 
     @PostMapping
-    public String postNotice(@ModelAttribute PostRegisterDto postRegisterDto) {
-        noticeService.saveNotice(postRegisterDto.getTitle(), postRegisterDto.getContent());
+    public String postNotice(@ModelAttribute NoteRegisterDto noteRegisterDto) {
+        noticeService.saveNotice(noteRegisterDto.getTitle(), noteRegisterDto.getContent());
         return "redirect:notice";
     }
 

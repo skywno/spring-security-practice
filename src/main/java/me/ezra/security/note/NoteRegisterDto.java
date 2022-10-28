@@ -1,11 +1,11 @@
-package me.ezra.security.post;
+package me.ezra.security.note;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class PostRegisterDto {
+public class NoteRegisterDto {
     private String title;
     private String content;
 }

@@ -1,10 +1,9 @@
-package me.ezra.security.post;
+package me.ezra.security.note;
 
 import lombok.AccessLevel;
-import lombok.Generated;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import me.ezra.security.User.User;
+import me.ezra.security.user.User;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -15,7 +14,7 @@ import java.time.LocalDateTime;
 @Getter
 @Table
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Post {
+public class Note {
 
     @Id
     @GeneratedValue
@@ -34,7 +33,7 @@ public class Post {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Post (String title, String content, User user) {
+    public Note (String title, String content, User user) {
         this.title = title;
         this.content = content;
         this.user = user;

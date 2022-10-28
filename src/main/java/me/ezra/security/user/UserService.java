@@ -1,4 +1,4 @@
-package me.ezra.security.User;
+package me.ezra.security.user;
 
 import lombok.RequiredArgsConstructor;
 import me.ezra.security.Exception.AlreadyRegisteredUserException;

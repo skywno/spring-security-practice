@@ -1,4 +1,4 @@
-package me.ezra.security.User;
+package me.ezra.security.user;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

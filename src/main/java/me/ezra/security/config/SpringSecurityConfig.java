@@ -1,7 +1,7 @@
 package me.ezra.security.config;
 
 import lombok.RequiredArgsConstructor;
-import me.ezra.security.User.UserService;
+import me.ezra.security.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
