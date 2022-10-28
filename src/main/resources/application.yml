@@ -1,6 +1,6 @@
 logging:
   level:
-    org.springframework.web: debug
+    root: info
     sql: error
 spring:
   mvc:
