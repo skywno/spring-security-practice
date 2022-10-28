@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -26,9 +25,9 @@ public class PostController {
     }
 
     @PostMapping
-    public String savePost(Authentication authentication, @ModelAttribute PostDto postDto) {
+    public String savePost(Authentication authentication, @ModelAttribute PostRegisterDto postRegisterDto) {
         User user = (User) authentication.getPrincipal();
-        postService.savePost(user, postDto.getTitle(), postDto.getContent());
+        postService.savePost(user, postRegisterDto.getTitle(), postRegisterDto.getContent());
         return "redirect:post";
     }
 
