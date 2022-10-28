@@ -27,8 +27,8 @@ public class NoticeController {
         return "redirect:notice";
     }
 
-    @DeleteMapping("/{id}")
-    public String deleteNotice(@PathVariable Long id) {
+    @DeleteMapping()
+    public String deleteNotice(@RequestParam Long id) {
         noticeService.deleteNotice(id);
         return "redirect:notice";
     }

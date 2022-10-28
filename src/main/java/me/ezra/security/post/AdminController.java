@@ -17,7 +17,7 @@ public class AdminController {
 
     private final PostService postService;
 
-    @GetMapping("/post")
+    @GetMapping
     public String getPostByAdmin(Authentication authentication, Model model) {
         User user = (User) authentication.getPrincipal();
         List<Post> posts = postService.findByUser(user);

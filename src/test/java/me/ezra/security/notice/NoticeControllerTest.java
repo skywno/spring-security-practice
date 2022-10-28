@@ -19,7 +19,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -98,13 +98,14 @@ class NoticeControllerTest {
     }
 
     @Test
-    @DisplayName("[DELETE] deleteNotice = 인증 없음 -> 로그인 페이지로 redireection")
+    @DisplayName("[DELETE] deleteNotice = 인증 없음 -> 로그인 페이지로 redirection")
     void whenDeletingNoticeWithoutAuthentication_thenForbidden() throws Exception {
         // Given
         Notice notice = noticeRepository.save(new Notice("제목", "내용"));
         // When & Then
-        mvc.perform(delete("/notice/"+ notice.getId()).with(csrf())
-        ).andExpect(status().is3xxRedirection());
+        mvc.perform(delete("/notice/" + notice.getId()).with(csrf()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/login"));
 
     }
 
@@ -122,13 +123,15 @@ class NoticeControllerTest {
 
     @Test
     @WithMockUser(roles = {"ADMIN"})
-    @DisplayName("[DELETE] deleteNotice = 어드민 인증 있음")
+    @DisplayName("[DELETE] deleteNotice = 어드민 인증 있음 -> notice 페이지로 redirection")
     void whenDeletingNoticeWithAdminAuthorization_thenOk() throws Exception {
         // Given
         Notice notice = noticeRepository.save(new Notice("제목", "내용"));
         // When & Then
-        mvc.perform(delete("/notice/" + notice.getId()).with(csrf())
-        ).andExpect(status().is3xxRedirection());
+        mvc.perform(delete("/notice").with(csrf()).queryParam("id",
+                        notice.getId().toString())
+                ).andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/notice"));
     }
 
 
