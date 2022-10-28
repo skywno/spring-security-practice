@@ -42,8 +42,13 @@ public class SpringSecurityConfig {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/");
 
-//        http.csrf().disable();
-//        http.headers().frameOptions().disable();
+        http.httpBasic().disable(); //basic authentication filter 비활성화
+        // Remember-Me
+        http.rememberMe();
+        // Csrf
+        http.csrf();
+        http.headers().frameOptions().disable();
+
         return http.build();
     }
 
