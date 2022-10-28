@@ -1,8 +1,10 @@
 # logging 레벨 설정
 logging:
   level:
-    root: info
+#    root: info
     sql: error
+    org.springframework.web: debug
+
 spring:
   # Overloaded POST 사용
   mvc:
