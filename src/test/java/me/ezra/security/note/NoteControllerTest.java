@@ -23,8 +23,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 @SpringBootTest
@@ -63,8 +62,9 @@ class NoteControllerTest {
             setupBefore = TestExecutionEvent.TEST_EXECUTION // 테스트 실행 직전에 유저를 가져온다.
     )
     void getNote_인증있음() throws Exception {
-        mockMvc.perform(get("/note")
-        ).andExpect(status().isOk());
+        mockMvc.perform(get("/note"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("note/index"));
     }
 
     @Test

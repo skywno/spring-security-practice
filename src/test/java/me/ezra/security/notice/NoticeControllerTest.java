@@ -58,7 +58,8 @@ class NoticeControllerTest {
         // Given
         // When & Then
         mvc.perform(get("/notice"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(view().name("notice/index"));
     }
 
     @Test
