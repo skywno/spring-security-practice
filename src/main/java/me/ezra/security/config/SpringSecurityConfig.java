@@ -2,11 +2,13 @@ package me.ezra.security.config;
 
 import lombok.RequiredArgsConstructor;
 import me.ezra.security.user.UserService;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -19,26 +21,36 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SpringSecurityConfig {
 
     private final UserService userService;
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                //정적 리소스 spring security 대상에서 제외
+//                .mvcMatchers("/images/**", "/css/**"); // 아래와 같은 코드입니다.
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "/home", "/index", "/signup", "/h2-console/**", "/console/**")
-                    .permitAll()
+                .antMatchers("/", "/home", "/index", "/signup", "/h2" +
+                        "-console/**", "/console/**")
+                .permitAll()
                 .antMatchers("/post")
-                    .hasRole("USER")
+                .hasRole("USER")
                 .antMatchers("/admin")
-                    .hasRole("ADMIN")
+                .hasRole("ADMIN")
                 .antMatchers(HttpMethod.POST, "/notice/**")
-                    .hasRole("ADMIN")
+                .hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/notice/**")
-                    .hasRole("ADMIN")
+                .hasRole("ADMIN")
                 .anyRequest()
-                    .authenticated()
+                .authenticated()
                 .and()
-                    .formLogin() // enable form based log in
-                    .loginPage("/login")
-                    .defaultSuccessUrl("/")
-                    .permitAll()
+                .formLogin() // enable form based log in
+                .loginPage("/login")
+                .defaultSuccessUrl("/")
+                .permitAll()
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
