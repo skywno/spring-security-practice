@@ -22,7 +22,7 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "/home", "/index", "/example", "/signup", "/h2-console/**", "/console/**")
+                .antMatchers("/", "/css/**", "/home", "/index", "/signup", "/h2-console/**", "/console/**")
                     .permitAll()
                 .antMatchers("/post")
                     .hasRole("USER")
