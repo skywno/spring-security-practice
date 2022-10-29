@@ -60,7 +60,7 @@ public class SpringSecurityConfig {
         );
         http.httpBasic().disable(); //basic authentication filter 비활성화
         // Remember-Me
-        http.rememberMe();
+        http.rememberMe().disable();
         // Csrf
         http.csrf();
         http.headers().frameOptions().disable();
