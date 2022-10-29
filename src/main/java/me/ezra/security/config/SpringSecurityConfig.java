@@ -1,6 +1,7 @@
 package me.ezra.security.config;
 
 import lombok.RequiredArgsConstructor;
+import me.ezra.security.filter.StopwatchFilter;
 import me.ezra.security.user.UserService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 /**
@@ -51,7 +53,11 @@ public class SpringSecurityConfig {
                     .logout()
                     .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                     .logoutSuccessUrl("/");
-
+        // stopwatch filter
+        http.addFilterBefore(
+                new StopwatchFilter(),
+                WebAsyncManagerIntegrationFilter.class
+        );
         http.httpBasic().disable(); //basic authentication filter 비활성화
         // Remember-Me
         http.rememberMe();
