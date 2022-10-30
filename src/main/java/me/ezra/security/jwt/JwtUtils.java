@@ -4,7 +4,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwsHeader;
 import io.jsonwebtoken.Jwts;
 import me.ezra.security.user.User;
+import me.ezra.security.jwt.JwtProperties;
 import org.springframework.data.util.Pair;
+
 
 import java.security.Key;
 import java.util.Date;
@@ -40,7 +42,6 @@ public class JwtUtils {
         Date now = new Date(); // 현재 시간
         Pair<String, Key> key = JwtKey.getRandomKey();
         // JWT Token 생성
-        Object JwtProperties;
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(now) // 토큰 발행 시간 정보
